@@ -20,7 +20,7 @@ pip install streamlit scikit-learn joblib pandas
 
 The app will open in your default web browser, allowing you to input data and make predictions.
 
-**Click [here] to use the web application(https://campusplacementrecruitment.streamlit.app/)**
+**Click [here](https://campusplacementrecruitment.streamlit.app/) to use the web application**
 
 ## Using the Web Application
 
