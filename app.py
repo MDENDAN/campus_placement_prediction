@@ -13,13 +13,26 @@ salary_model = load_model('model/salary/random_forest_regression_model.joblib')
 # Create a Streamlit web app
 st.title('Campus Recruitment Prediction')
 st.write('This app predicts campus recruitment status and salary based on selected features.')
+st.markdown("""
+<style>
+.big-font {
+    font-size:33px !important;
+    font-weight: bold;
+}
 
-name = st.text_input('Enter your name', '')
+.medium{
+    font-size:28px !important;
+    font-weight: bold;    
+}
+</style>
+""", unsafe_allow_html=True)
+st.markdown('<p class="big-font">Enter your name</p>', unsafe_allow_html=True)
+name = st.text_input("")
 # Define input fields for user input
 user_input_container = st.container()
 
 with user_input_container:
-    st.header('Please Enter correct details')
+    st.markdown('<p class="medium">Please Enter correct details</p>',unsafe_allow_html=True)
 
     # Gender
     gender = st.selectbox('Select Gender', ['Male', 'Female'])
