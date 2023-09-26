@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from model import load_model, predict
 import os
+import sklearn
 
 # Get the current working directory
 current_directory = os.getcwd()
