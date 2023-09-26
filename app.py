@@ -1,13 +1,7 @@
 import streamlit as st
 import pandas as pd
 from model import load_model, predict
-import os
-
-# Get the current working directory
-current_directory = os.getcwd()
-
-# Print the current working directory
-print("Current Directory:", current_directory)
+import time
 
 # Load your trained model (make sure the model file 'svm_model_OPT.pkl' is in the same directory)
 # status_model_filename = 'model\status\svm_model_OPT.pkl'
@@ -20,11 +14,12 @@ salary_model = load_model('model/salary/random_forest_regression_model.joblib')
 st.title('Campus Recruitment Prediction')
 st.write('This app predicts campus recruitment status and salary based on selected features.')
 
+name = st.text_input('Enter your name', '')
 # Define input fields for user input
 user_input_container = st.container()
 
 with user_input_container:
-    st.header('User Input')
+    st.header('Please Enter correct details')
 
     # Gender
     gender = st.selectbox('Select Gender', ['Male', 'Female'])
@@ -123,13 +118,23 @@ if st.button("Make Prediction"):
 
     # Call the make_prediction function with the input values
     recruitment_status = predict(status_model, [input_values])
-
-    # Display the prediction
-    st.write("Prediction:", recruitment_status)
-
-    if recruitment_status == 1:
+    if recruitment_status==1:
         # Calculate salary only if status is "Placed"
         salary_prediction = predict(salary_model,[input_values])
-        st.write("Salary Prediction:", salary_prediction)
+        rounded_salary = round(salary_prediction / 1000) * 1000
+        lower_range = rounded_salary - 1000
+        upper_range = rounded_salary + 1000
+        st.balloons()
+        succes = st.success(f"🎉Congratulations! {name} has high chances of getting PLACED! 🎉")
+        time.sleep(3)
+        succes.empty()
+        # Display the prediction
+        st.write("Result Predicted: SUCCESSFULL")
+
+        st.write(f"Salary Prediction: {lower_range} to {upper_range}")
     else:
-        st.write("Salary Prediction: N/A (Status is not 'Placed')")
+        st.write("Result Predicted: NOT SUCCESSFULL")
+        st.write("😔 Sorry, you are not placed.")
+else:
+    # Display a neutral message when the button is not clicked
+    st.write("Click the 'Make Prediction' button to check your placement status.")
