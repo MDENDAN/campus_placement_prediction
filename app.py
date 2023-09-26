@@ -1,13 +1,20 @@
 import streamlit as st
 import pandas as pd
 from model import load_model, predict
+import os
+
+# Get the current working directory
+current_directory = os.getcwd()
+
+# Print the current working directory
+print("Current Directory:", current_directory)
 
 # Load your trained model (make sure the model file 'svm_model_OPT.pkl' is in the same directory)
 # status_model_filename = 'model\status\svm_model_OPT.pkl'
-status_model = load_model('.\model\status\DT_model.joblib')
+status_model = load_model('model\status\DT_model.joblib')
 
 # salary_model_filename = 'model/salary/random_forest_regression_model.joblib'
-salary_model = load_model('\.model\salary\\random_forest_regression_model.joblib')
+salary_model = load_model('model\salary\\random_forest_regression_model.joblib')
 
 # Create a Streamlit web app
 st.title('Campus Recruitment Prediction')
